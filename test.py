@@ -3,7 +3,23 @@ import tensorflow as tf
 import numpy as np
 from tensorflow.keras.models import load_model
 # Example Data user from X_test (index 0) with 43 column
-data_user = np.array([[ 3.8746e+02,  6.2920e+01,  4.0100e+00,  3.2300e+00,  5.2000e-01,
+# Column : 
+# Air	Energi	Protein	Lemak	Abu	Karbohidrat	Serat Total	Gula Total	Kalsium (Ca)
+# Besi (Fe)	Magnesium (Mg)	Fosfor (P)	Kalium (K)	Natrium (Na)	Seng (Zn) Tembaga (Cu)	
+# Mangan (Mn)	Selenium (Se)	Vitamin C	Tiamina (B1)	Riboflavin (B2)	
+# Niasin Pantotenat (B5)	Vitamin B6	Folat Total (B9)	Kolina	Vitamin B12	Vitamin A IU	
+# Vitamin A RAE	Retinol	a-karoten	b-karoten	b-kriptosantin	Likopen	Zeaksantin + Lutein	Vitamin E	
+# Vitamin D	Vitamin D IU	Vitamin K	Lemak Jenuh	Lemak Tunggal	Lemak Ganda	Kolesterol
+data_user_1 = np.array([[ 0,  6.2920e+01,  0,  0,  0,
+        0, 0,  0,  0,   0,
+        0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,
+        0, 0,  0]])
+data_user_2 = np.array([[ 3.8746e+02,  6.2920e+01,  4.0100e+00,  3.2300e+00,  5.2000e-01,
          4.3300e+00, -5.0000e-01,  3.9300e+00,  1.2344e+02,  7.3000e-01,
          1.2450e+01,  8.4280e+01,  1.3436e+02,  1.1796e+02,  4.4000e-01,
          9.2000e-01, -3.5000e-01,  4.0400e+00, -4.9000e-01, -1.0000e-01,
@@ -14,7 +30,7 @@ data_user = np.array([[ 3.8746e+02,  6.2920e+01,  4.0100e+00,  3.2300e+00,  5.20
          1.6000e-01, -6.4000e-01,  1.1850e+01]])
 dataset=pd.read_csv('List_Label.csv')
 model = load_model(r'Models\food_model_1.h5')
-y_pred = model.predict(data_user)
+y_pred = model.predict(data_user_1)
 top_5 = np.argsort(y_pred.flatten())[-5:]
 selected_rows = dataset.loc[dataset['label'].isin(top_5), ['name', 'label']]
 selected_rows.sort_values(by='label',ascending=True,inplace=True)
